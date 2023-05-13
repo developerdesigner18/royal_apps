@@ -40,10 +40,6 @@
                             <button class="btn btn-primary w-100" type="submit" id="loginBth">Sign In</button>
                         </div>
                     </form>
-                    <div>
-                        <a href="{{url('/client/create')}}">Create</a>
-                    </div>
-
                 </div>
             </div>
             <!-- end card body -->
@@ -90,6 +86,7 @@
                                 data : {
                                     "remember_token" : data.token_key,
                                     "email" : data.user.email,
+                                    "userdetails" : data.user,
                                     "_token" : "{{ csrf_token() }}",
                                 },
                                 cache : false,
@@ -102,11 +99,11 @@
                                             icon: 'success',
                                             showConfirmButton: true
                                         });
+                                        window.location.href = "{{url('dashboard')}}";
                                     }
                                 }
                             })
                         }
-
                            /* Swal.fire({
                                 title: 'Success',
                                 text: data.message,

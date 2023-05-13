@@ -76,6 +76,12 @@
         $("#loginForm").validate({
             rules : {
                 title : { required : true},
+                author : { required : true},
+                release_date : { required : true},
+                description : { required : true},
+                format : { required : true},
+                isbn : { required : true},
+                number_of_pages : { required : true},
             },
             messages : {
                 title : { required : "Please enter title"},

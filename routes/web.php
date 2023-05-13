@@ -20,10 +20,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/client',[clientController::class,'index'])->name('client-login');
-Route::get('/client/create',[clientController::class,'create_index'])->name('client-create');
-Route::get('/authors',[authorsController::class,'index'])->name('authors');
-Route::get('/add-book',[bookController::class,'index'])->name('add-book');
-Route::get('/authors/{authors}',[authorsController::class,'authors_books'])->name('authors_books');
+Route::get('/client',[clientController::class,'index'])->name('login');
+Route::get('/logout',[clientController::class,'logout'])->name('logout');
 Route::post('/store-token',[clientController::class,'store_token'])->name('store-token');
-Route::post('/create-client',[clientController::class,'create'])->name('create-client');
+Route::group(['middleware'=>'token'],function () {
+    Route::get('/dashboard',[clientController::class,'dashboard'])->name('dashboard');
+    Route::get('/client/create',[clientController::class,'create_index'])->name('client-create');
+    Route::get('/authors',[authorsController::class,'index'])->name('authors');
+    Route::get('/add-book',[bookController::class,'index'])->name('add-book');
+    Route::get('/authors/{authors}',[authorsController::class,'authors_books'])->name('authors_books');
+    Route::post('/check-books',[authorsController::class,'authors_books_check'])->name('check-books');
+    Route::post('/create-client',[clientController::class,'create'])->name('create-client');
+});
+

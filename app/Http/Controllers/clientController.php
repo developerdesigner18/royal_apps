@@ -12,14 +12,25 @@ class clientController extends Controller
         return view('client.login');
 
     }
+    public function dashboard(){
+        $user = session('user');
+        return view('dashboard',compact('user'));
+
+    }
+    public function logout(){
+        if (session()->has('token')) {
+            session()->forget('token');
+        }
+        if (session()->has('user')) {
+            session()->forget('user');
+        }
+        return redirect('client');
+    }
 
     public function store_token(Request $request){
-//        $user = User::where('email' , $request->email)->first();
-//        $user->api_token = $request->remember_token;
-//        $user->save();
         $user = true;
         if($user){
-            session(['token' => $request->remember_token]);
+            session(['token' => $request->remember_token,'user'=> $request->userdetails]);
             return response()->json(['status' => 1, 'message' => 'Token Saved successfully' , 'token' => $request->remember_token]);
         }else{
             return response()->json(['status' => 0, 'message' => 'Token Cannot saved' , 'token' => $request->remember_token]);

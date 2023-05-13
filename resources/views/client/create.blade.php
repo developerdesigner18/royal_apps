@@ -24,7 +24,6 @@
                 </div>
                 <div class="p-2 mt-4">
                     <form id="loginForm">
-                        @csrf
                         <div class="mb-3">
                             <label for="username" class="form-label">Email</label>
                             <input type="text" class="form-control" id="username" name="email" placeholder="Enter email">
@@ -39,15 +38,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter firstname">
+                            <input type="text" class="form-control" id="firstname" name="first_name" placeholder="Enter firstname">
                         </div>
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter firstname">
-                        </div>
-                        <div class="mb-3" hidden="">
-                            <label for="active" class="form-label">Active</label>
-                            <input type="text" class="form-control" id="active" name="active" value="true">
+                            <input type="text" class="form-control" id="lastname" name="last_name" placeholder="Enter firstname">
                         </div>
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
@@ -82,7 +77,9 @@
         $("#loginForm").validate({
             rules : {
                 email : { required : true, email : true },
-                password : { required : true }
+                first_name : { required : true,},
+                last_name : { required : true, },
+                password : { required : true ,minlength: 23}
             },
             messages : {
                 email : { required : "Please enter email address", email : "Please enter your email address properly" },
@@ -92,7 +89,11 @@
             submitHandler : function (form,e){
                 e.preventDefault();
                 let data = new FormData(form);
+                let roles = data.getAll('roles[]');
+                data.delete('roles[]');
                 let plainFormData = Object.fromEntries(data.entries());
+                plainFormData.roles = roles;
+                plainFormData.active = true;
                 let jsonData = JSON.stringify(plainFormData);
                 $.ajax({
                     url : 'https://candidate-testing.api.royal-apps.io/api/v2/users',
@@ -110,40 +111,18 @@
                     },
                     success : function(data){
                         console.log(data);
-                        if(data){
-                            $.ajax({
-                                url : '{{route('store-token')}}',
-                                type : "POST",
-                                data : {
-                                    "remember_token" : data.token_key,
-                                    "email" : data.user.email,
-                                    "_token" : "{{ csrf_token() }}",
-                                },
-                                cache : false,
-                                async : false,
-                                success: function (datas){
-                                    if(datas.status == 1){
-                                        Swal.fire({
-                                            title: 'Success',
-                                            text: datas.message,
-                                            icon: 'success',
-                                            showConfirmButton: true
-                                        });
-                                    }
-                                }
-                            })
+                        if(data) {
+                            Swal.fire({
+                                 title: 'Success',
+                                 text: data.message,
+                                 icon: 'success',
+                                 timer: 2000,
+                                 showCancelButton: false,
+                                 showConfirmButton: false
+                             });
+                             $("#loginForm").trigger('reset');
+                             window.location.reload();
                         }
-
-                        /* Swal.fire({
-                             title: 'Success',
-                             text: data.message,
-                             icon: 'success',
-                             timer: 2000,
-                             showCancelButton: false,
-                             showConfirmButton: false
-                         });
-                         $("#loginForm").trigger('reset');
-                         window.location.reload();*/
                     },
                     complete : function (){
                         $("#loginBtn").removeAttr('disabled');

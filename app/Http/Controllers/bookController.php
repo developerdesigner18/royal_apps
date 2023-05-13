@@ -26,8 +26,6 @@ class bookController extends Controller
         foreach ($authors['items'] as $store){
             $authersdata[] = ['id' => $store['id'] , 'name' => $store['first_name'].' '.$store['last_name']];
         }
-
-
         return view('books.add',compact('authersdata'));
     }
 

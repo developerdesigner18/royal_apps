@@ -26,6 +26,7 @@
             retrieve: false,
             processing: true,
             responsive: true,
+
             info: true,
             dom: "Bfrtip",
             lengthMenu: [

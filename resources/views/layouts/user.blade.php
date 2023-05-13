@@ -21,7 +21,7 @@
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="{{route('dashboard')}}">@yield('pagename')</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -29,9 +29,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}">Logout</a>
             </li>
-            <li class="nav-link"><a href="{{route('client-create')}}">Create Client</a></li>
-            <li class="nav-link"><a href="{{route('authors')}}">Authors</a></li>
-            <li class="nav-link"><a href="{{route('add-book')}}">Add Books</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('client-create')}}">Create Client</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('authors')}}">Authors</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('add-book')}}">Add Books</a></li>
         </ul>
     </div>
 </nav>

@@ -12,16 +12,14 @@
             <div class="card">
                 <div class="card-body">
                     <table class="table align-middle table-nowrap w-100" id="userTable"></table>
-                </div><!-- end card -->
+                </div>
             </div>
-            <!-- end col -->
         </div>
-        <!-- end col -->
     </div>
 @endsection
 @section('js')
-
 <script>
+{{-- data table --}}
     let dataTable = $("#userTable").DataTable({
         retrieve: false,
         processing: true,

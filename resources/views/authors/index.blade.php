@@ -13,15 +13,16 @@
                 </div>
                 <div class="card-body">
                     <table class="table align-middle table-nowrap w-100" id="userTable"></table>
-                </div><!-- end card -->
+                </div>
             </div>
-            <!-- end col -->
+
         </div>
-        <!-- end col -->
+
     </div>
 @endsection
 @section('js')
     <script>
+{{-- datatable --}}
         let dataTable = $("#userTable").DataTable({
             retrieve: false,
             processing: true,
@@ -76,6 +77,7 @@
             },
         });
 
+        // delete authors
         $(document).on('click', '.btnDelete', function () {
             let id = $(this).data('id');
             Swal.fire({
@@ -90,6 +92,7 @@
                 buttonsStyling: !1,
             }).then(function (t) {
                 if (t.value) {
+                    // check the auther have any books
                     $.ajax({
                         url: "{{route('check-books')}}",
                         method: "POST",
@@ -101,8 +104,8 @@
                             "id": id,
                         },
                         success: function (data) {
-
                             if (data.status == 1) {
+                                // if author dont have any books this will proccedd
                                 $.ajax({
                                     url: "https://candidate-testing.api.royal-apps.io/api/v2/authors/" + id,
                                     method: "DELETE",

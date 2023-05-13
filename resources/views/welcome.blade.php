@@ -1,3 +1,4 @@
+{{--By default page crated by laravel --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

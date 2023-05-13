@@ -8,15 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class clientController extends Controller
 {
+//    LOGIN PAGE
     public function index(){
         return view('client.login');
 
     }
+//    DASHBOARD
     public function dashboard(){
         $user = session('user');
         return view('dashboard',compact('user'));
 
     }
+//    LOGOUT USER
     public function logout(){
 
         if (session()->has('token')) {
@@ -28,6 +31,7 @@ class clientController extends Controller
         return redirect('client');
     }
 
+//    FOR SESSION STORE
     public function store_token(Request $request){
         $user = true;
         if($user){
@@ -37,11 +41,7 @@ class clientController extends Controller
             return response()->json(['status' => 0, 'message' => 'Token Cannot saved' , 'token' => $request->remember_token]);
         }
     }
-
-    public function create(Request $request){
-
-    }
-
+//    CLIENT CREATE PAGE
     public  function create_index(){
         return view('client.create');
     }

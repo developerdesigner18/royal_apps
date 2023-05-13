@@ -77,6 +77,7 @@
                 errorClass: "text-danger",
                 submitHandler : function (form,e){
                     e.preventDefault();
+                    // data is our form
                     let data = new FormData(form);
                     let plainFormData = Object.fromEntries(data.entries());
                     plainFormData.number_of_pages = parseInt(plainFormData.number_of_pages);

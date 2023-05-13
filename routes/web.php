@@ -23,6 +23,8 @@ Route::get('/', function () {
 Route::get('/client',[clientController::class,'index'])->name('login');
 Route::get('/logout',[clientController::class,'logout'])->name('logout');
 Route::post('/store-token',[clientController::class,'store_token'])->name('store-token');
+
+//ONLY ACCESS WE HAVE ATHORIZATION
 Route::group(['middleware'=>'token'],function () {
     Route::get('/dashboard',[clientController::class,'dashboard'])->name('dashboard');
     Route::get('/client/create',[clientController::class,'create_index'])->name('client-create');

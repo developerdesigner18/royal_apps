@@ -35,16 +35,13 @@
                                 <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                             </div>
                         </div>
-
                         <div class="mt-4">
                             <button class="btn btn-primary w-100" type="submit" id="loginBth">Sign In</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
     </div>
 </div>
 </body>
@@ -78,7 +75,6 @@
                         $("#loginBtn").attr('disabled','disabled');
                     },
                     success : function(data){
-                        console.log(data);
                         if(data){
                             $.ajax({
                                 url : '{{route('store-token')}}',
@@ -104,16 +100,6 @@
                                 }
                             })
                         }
-                           /* Swal.fire({
-                                title: 'Success',
-                                text: data.message,
-                                icon: 'success',
-                                timer: 2000,
-                                showCancelButton: false,
-                                showConfirmButton: false
-                            });
-                            $("#loginForm").trigger('reset');
-                            window.location.reload();*/
                     },
                     complete : function (){
                         $("#loginBtn").removeAttr('disabled');

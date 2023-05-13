@@ -30,10 +30,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="role" class="form-label">Role</label>
-                            <select name="roles[]" class="form-control multiplerole" id="role" multiple>
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                            <select name="roles[]" class="form-control multiplerole" id="role">
+                                <option value="ROLE_ADMIN" selected>ROLE_ADMIN</option>
+                                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
                             </select>
                         </div>
                         <div class="mb-3">

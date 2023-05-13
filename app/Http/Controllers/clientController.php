@@ -18,6 +18,7 @@ class clientController extends Controller
 
     }
     public function logout(){
+
         if (session()->has('token')) {
             session()->forget('token');
         }
